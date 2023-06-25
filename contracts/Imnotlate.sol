@@ -24,12 +24,18 @@ contract Imnotlate is
 
     Counters.Counter private _tokenIdCounter;
 
-    constructor() ERC721("Imnotlate", "INL") EIP712("Imnotlate", "1") {}
+    string public uri;
 
-    function safeMint(address to, string memory uri) public {
+    constructor(
+        string memory _uri
+    ) ERC721("Imnotlate", "INL") EIP712("Imnotlate", "1") {
+        uri = _uri;
+    }
+
+    function safeMint() public {
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
-        _safeMint(to, tokenId);
+        _safeMint(msg.sender, tokenId);
         _setTokenURI(tokenId, uri);
     }
 
