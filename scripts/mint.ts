@@ -15,16 +15,12 @@ async function main() {
     return;
   }
   const nft = new ethers.Contract(contractAddress, nftAbi.abi, issuer)
-  const numberOfMint = 100
+  const numberOfMint = 1
   let timestamp = Date.now()
   try {
     for (let i = 0 ; i < numberOfMint ; i++) {
       let previousMint = timestamp
-      // 500000 works
-      // 50000 fails
-      // 100000 fails
-      // 300000 works
-      const mint = await nft.safeMint({gasLimit: 300000});
+      const mint = await nft.safeMint({gasLimit: 300000}); // Shouldn't use the gasLimit option: https://docs.arthera.net/build/differences/#differences
       const mintReceipt = await mint.wait(1);
       const diff = Date.now() - previousMint // not super reliable
       console.log("Done ✅", mintReceipt.transactionHash, diff, "milliseconds")
