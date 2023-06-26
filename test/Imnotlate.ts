@@ -27,5 +27,13 @@ describe("Imnotlate", function () {
       await nft.safeMint();
       expect(await nft.ownerOf(0)).to.be.equal(alice.address);
     })
+    it("Should mint 300 NFTs", async function () {
+      const { nft, alice } = await loadFixture(deployContracts);
+      for (let i = 0 ; i < 300 ; i++) {
+        const mint = await nft.safeMint();
+        const mintReceipt = await mint.wait(1);
+      }
+      expect(await nft.balanceOf(alice.address)).to.be.equal(200);
+    })
   })
 })
