@@ -15,14 +15,19 @@ async function main() {
     return;
   }
   const nft = new ethers.Contract(contractAddress, nftAbi.abi, issuer)
-  // const supply = await nft.totalSupply()
-  const supply = 3
-  console.log('\nCurrent total upply:', Number(supply))
+  const supply = await nft.totalSupply()
+  console.log('\nCurrent total supply:', Number(supply))
   try {
     console.log(" ")
-    for (let id = 0 ; id < supply ; id++) {
+    let listOfAccounts:any = []
+    for (let id = 0 ; id < Number(supply) ; id++) {
       const holderAddress = await nft.ownerOf(id)
-      console.log("ID #"+id+" is owned by account", holderAddress)
+      console.log("ID #" + id + " is owned by account", holderAddress)
+      listOfAccounts.push(holderAddress)
+      fs.writeFileSync(
+        "holders-list.json",
+        JSON.stringify(listOfAccounts)
+      );
     }
   } catch(e) {
     console.log("Error ❌", e)
