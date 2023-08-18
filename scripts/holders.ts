@@ -15,18 +15,20 @@ async function main() {
     return;
   }
   const nft = new ethers.Contract(contractAddress, nftAbi.abi, issuer)
-  const numberOfMint = 1
-  let timestamp = Date.now()
+  const supply = await nft.totalSupply()
+  console.log('\nCurrent total supply:', Number(supply))
   try {
-    for (let i = 0 ; i < numberOfMint ; i++) {
-      let previousMint = timestamp
-      // const mint = await nft.safeMint({gasLimit: 300000}); // Shouldn't use the gasLimit option: https://docs.arthera.net/build/differences/#differences
-      const mint = await nft.safeMint(); 
-      const mintReceipt = await mint.wait(1);
-      const diff = Date.now() - previousMint // not super reliable
-      console.log("Done ✅", mintReceipt.transactionHash, diff, "milliseconds")
+    console.log(" ")
+    let listOfAccounts:any = []
+    for (let id = 0 ; id < Number(supply) ; id++) {
+      const holderAddress = await nft.ownerOf(id)
+      console.log("ID #" + id + " is owned by account", holderAddress)
+      listOfAccounts.push(holderAddress)
+      fs.writeFileSync(
+        "holders-list.json",
+        JSON.stringify(listOfAccounts)
+      );
     }
-    
   } catch(e) {
     console.log("Error ❌", e)
   }
