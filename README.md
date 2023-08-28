@@ -1,6 +1,4 @@
-# I'm not late
-
-Mint yours at: https://imnotlate.on.fleek.co/
+# AWP Contracts
 
 ## Install
 
@@ -32,17 +30,19 @@ npx hardhat run scripts/deploy.ts --network arthera-testnet
 
 ## Mint
 
+Add your contract address in the `mint.ts` script and run: 
+
 ```
 npx hardhat run scripts/mint.ts --network arthera-testnet
 ```
 
 ## Latest deployment
 
-- [June-25-2023 17:38:39 PM +02:00 UTC](https://explorer-test.arthera.net/address/0xe2c7afe278BD3B60798208F84281A4e4733d1688)
+- [August-28-2023 12:53:43 PM +02:00 UTC](https://explorer-test.arthera.net/address/0xCd738DF3e710AE002D6Ae990645aA5Fb0A1Ee158)
 
 ## Listing NFT holders
 
-Run: 
+Add your contract address in the `holders.ts` script and run: 
 
 ```
 npx hardhat run scripts/holders.ts --network arthera-testnet
@@ -54,11 +54,9 @@ It will create a `holders-list.json` file that will look like this:
 ["0xE45079d379712E51408B00496D232407D9449F79","0x476E2651BF97dE8a26e4A05a9c8e00A6EFa1390c","0x9A4EA840a38bcfb341950e754d939DdE82b3d35b"]
 ```
 
-Latest extract: Aug 18, 2023 at 5 pm Paris time.
-
 ## Versions
 
-- Node [v18.15.0](https://nodejs.org/uk/blog/release/v18.15.0/)
+- Node [v18.17.1](https://nodejs.org/uk/blog/release/v18.17.1/)
 - NPM [v9.5.0](https://github.com/npm/cli/releases/tag/v9.5.0)
 - OpenZeppelin Contracts [v4.8.0](https://github.com/OpenZeppelin/openzeppelin-contracts/releases/tag/v4.8.0)
 

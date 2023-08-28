@@ -4,9 +4,9 @@ import fs from 'fs'
 async function main() {
 
   const [issuer] = await ethers.getSigners()
-  const contractAddress = '0xe2c7afe278BD3B60798208F84281A4e4733d1688'
+  const contractAddress = '0xCd738DF3e710AE002D6Ae990645aA5Fb0A1Ee158'
   const abiDir = __dirname + '/../artifacts/contracts';
-  const nftAbiContract = abiDir + "/" + "Imnotlate.sol" + "/" + "Imnotlate" + ".json"  
+  const nftAbiContract = abiDir + "/" + "AWP.sol" + "/" + "AWP" + ".json"  
   let nftAbi;
   try {
     nftAbi = JSON.parse(fs.readFileSync(nftAbiContract,{encoding:'utf8', flag:'r'}));

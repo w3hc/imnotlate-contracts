@@ -1,0 +1,17 @@
+{
+    "fileName": "Arthera WP Test",
+    "author": "Arthera",
+    "description": "This NFT gives you access to the full version of Arthera Whitepaper.",
+    "external_url": "https://docs.arthera.net/",
+    "image": "<IMAGE>",
+    "attributes": [
+        {
+            "trait_type": "Attribute #1",
+            "value": "<SOME_VALUE>"
+        },
+        {
+            "trait_type": "Attribute #2",
+            "value": "<SOME_VALUE>"
+        }
+    ]
+}
