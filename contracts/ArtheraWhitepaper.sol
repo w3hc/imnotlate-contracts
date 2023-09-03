@@ -11,9 +11,8 @@ import "@openzeppelin/contracts/token/ERC721/extensions/draft-ERC721Votes.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
-
 /// @custom:security-contact julien.arthera@arthera.net
-contract AWP is
+contract ArtheraWhitepaper is
     ERC721,
     ERC721Enumerable,
     ERC721URIStorage,
@@ -32,7 +31,7 @@ contract AWP is
 
     constructor(
         string memory _uri
-    ) ERC721("AWP Test", "AWPT") EIP712("AWP Test", "1") {
+    ) ERC721("Arthera Whitepaper", "WP") EIP712("Arthera Whitepaper", "1") {
         uri = _uri;
     }
 
@@ -44,8 +43,6 @@ contract AWP is
         _safeMint(msg.sender, tokenId);
         _setTokenURI(tokenId, uri);
     }
-
-    // The following functions are overrides required by Solidity.
 
     function _beforeTokenTransfer(
         address from,

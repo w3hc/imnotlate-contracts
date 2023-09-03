@@ -6,7 +6,7 @@ async function main() {
   const [issuer] = await ethers.getSigners()
   const contractAddress = '0xCd738DF3e710AE002D6Ae990645aA5Fb0A1Ee158'
   const abiDir = __dirname + '/../artifacts/contracts';
-  const nftAbiContract = abiDir + "/" + "AWP.sol" + "/" + "AWP" + ".json"  
+  const nftAbiContract = abiDir + "/" + "ArtheraWhitepaper.sol" + "/" + "ArtheraWhitepaper" + ".json"  
   let nftAbi;
   try {
     nftAbi = JSON.parse(fs.readFileSync(nftAbiContract,{encoding:'utf8', flag:'r'}));
