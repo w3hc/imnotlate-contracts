@@ -1,4 +1,9 @@
-# AWP Contracts
+# Arthera Whitepaper NFT Contracts
+
+The NFT gives you access to the Arthera Whitepaper.
+
+- UI Github repo: https://github.com/w3hc/awp-ui 
+- Web app: https://whitepaper.arthera.net/
 
 ## Install
 
@@ -36,9 +41,9 @@ Add your contract address in the `mint.ts` script and run:
 npx hardhat run scripts/mint.ts --network arthera-testnet
 ```
 
-## Latest deployment
+## Metadata
 
-- [August-28-2023 12:53:43 PM +02:00 UTC](https://explorer-test.arthera.net/address/0xCd738DF3e710AE002D6Ae990645aA5Fb0A1Ee158)
+[View the json file on Web3.Storage](https://bafybeifkpdwa4tkbbze5qui3yn2ph5cntiiojmdlkoxah5fs4mc55b3vt4.ipfs.w3s.link/arthera-whitepaper-nft-metadata.json).
 
 ## Listing NFT holders
 
