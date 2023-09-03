@@ -4,9 +4,9 @@ import fs from 'fs'
 async function main() {
 
   const [issuer] = await ethers.getSigners()
-  const contractAddress = '0xe2c7afe278BD3B60798208F84281A4e4733d1688'
+  const contractAddress = '0xCd738DF3e710AE002D6Ae990645aA5Fb0A1Ee158'
   const abiDir = __dirname + '/../artifacts/contracts';
-  const nftAbiContract = abiDir + "/" + "Imnotlate.sol" + "/" + "Imnotlate" + ".json"  
+  const nftAbiContract = abiDir + "/" + "ArtheraWhitepaper.sol" + "/" + "ArtheraWhitepaper" + ".json"  
   let nftAbi;
   try {
     nftAbi = JSON.parse(fs.readFileSync(nftAbiContract,{encoding:'utf8', flag:'r'}));
@@ -15,18 +15,11 @@ async function main() {
     return;
   }
   const nft = new ethers.Contract(contractAddress, nftAbi.abi, issuer)
-  const numberOfMint = 1
-  let timestamp = Date.now()
+
   try {
-    for (let i = 0 ; i < numberOfMint ; i++) {
-      let previousMint = timestamp
-      // const mint = await nft.safeMint({gasLimit: 300000}); // Shouldn't use the gasLimit option: https://docs.arthera.net/build/differences/#differences
-      const mint = await nft.safeMint(); 
-      const mintReceipt = await mint.wait(1);
-      const diff = Date.now() - previousMint // not super reliable
-      console.log("Done ✅", mintReceipt.transactionHash, diff, "milliseconds")
-    }
-    
+    const mint = await nft.safeMint(); 
+    const mintReceipt = await mint.wait(1);
+    console.log("\nMinted ✅", mintReceipt.transactionHash)
   } catch(e) {
     console.log("Error ❌", e)
   }

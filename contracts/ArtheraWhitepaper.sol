@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
+pragma solidity 0.8.15;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
@@ -9,37 +9,40 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/cryptography/draft-EIP712.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/draft-ERC721Votes.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
-/// @custom:security-contact julien@strat.cc
-contract Imnotlate is
+/// @custom:security-contact julien.arthera@arthera.net
+contract ArtheraWhitepaper is
     ERC721,
     ERC721Enumerable,
     ERC721URIStorage,
     ERC721Burnable,
     Ownable,
     EIP712,
-    ERC721Votes
+    ERC721Votes,
+    ReentrancyGuard
 {
     using Counters for Counters.Counter;
-
     Counters.Counter private _tokenIdCounter;
 
     string public uri;
 
+    mapping(address => bool) public alreadyMinted;
+
     constructor(
         string memory _uri
-    ) ERC721("Imnotlate", "INL") EIP712("Imnotlate", "1") {
+    ) ERC721("Arthera Whitepaper", "WP") EIP712("Arthera Whitepaper", "1") {
         uri = _uri;
     }
 
-    function safeMint() public {
+    function safeMint() public nonReentrant {
+        require(alreadyMinted[msg.sender] == false, "Caller already minted");
+        alreadyMinted[msg.sender] = true;
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(msg.sender, tokenId);
         _setTokenURI(tokenId, uri);
     }
-
-    // The following functions are overrides required by Solidity.
 
     function _beforeTokenTransfer(
         address from,
