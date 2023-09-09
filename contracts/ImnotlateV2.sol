@@ -11,7 +11,7 @@ import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721VotesU
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 /// @custom:security-contact julien@strat.cc
-contract Imnotlate is
+contract ImnotlateV2 is
     ERC721Upgradeable,
     ERC721EnumerableUpgradeable,
     ERC721URIStorageUpgradeable,
@@ -28,10 +28,12 @@ contract Imnotlate is
 
     mapping(address => bool) public alreadyMinted;
 
+    uint public newVar;
+
     function initialize(string memory _uri) public initializer {
         __Ownable_init();
-        __ERC721_init("Imnotlate", "INL");
-        __EIP712_init("Imnotlate", "1");
+        __ERC721_init("Abbe Pierre", "Pierre");
+        __EIP712_init("Abbe Pierre", "1");
         uri = _uri;
     }
 
@@ -43,6 +45,8 @@ contract Imnotlate is
         _setTokenURI(tokenId, uri);
         alreadyMinted[msg.sender] = true;
     }
+
+    function newFunc() public {}
 
     function _beforeTokenTransfer(
         address from,
