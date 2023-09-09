@@ -26,6 +26,8 @@ contract Imnotlate is
 
     string public uri;
 
+    mapping(address => bool) public alreadyMinted;
+
     constructor(
         string memory _uri
     ) ERC721("Imnotlate", "INL") EIP712("Imnotlate", "1") {
@@ -33,13 +35,13 @@ contract Imnotlate is
     }
 
     function safeMint() public {
+        require(alreadyMinted[msg.sender] == false, "Caller already minted");
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
         _safeMint(msg.sender, tokenId);
         _setTokenURI(tokenId, uri);
+        alreadyMinted[msg.sender] = true;
     }
-
-    // The following functions are overrides required by Solidity.
 
     function _beforeTokenTransfer(
         address from,
