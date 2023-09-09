@@ -5,7 +5,7 @@ Mint yours at: https://imnotlate.on.fleek.co/
 ## Install
 
 ```
-npm i
+pnpm i
 ```
 
 ## Test
@@ -27,7 +27,7 @@ Add your own keys in your `.env` file.
 Deploy:
 
 ```
-npx hardhat run scripts/deploy.ts --network arthera-testnet
+pnpm dontbelate
 ```
 
 ## Mint
