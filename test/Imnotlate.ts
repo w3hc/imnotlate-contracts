@@ -6,13 +6,13 @@ describe("Imnotlate", function () {
 
   async function deployContracts() {
     
-    const [alice] = await ethers.getSigners()
+    const [alice, bob] = await ethers.getSigners()
 
     const uri = "ipfs://bafkreih2ac5yabo2daerkw5w5wcwdc7rveqejf4l645hx2px26r5fxfnpe"
     const Imnotlate = await ethers.getContractFactory("Imnotlate");
     const nft = await Imnotlate.deploy(uri as any);
 
-    return { nft, alice, uri }
+    return { nft, alice, uri, bob }
   }
 
   describe("Deployment", function () {
@@ -27,13 +27,17 @@ describe("Imnotlate", function () {
       await nft.safeMint();
       expect(await nft.ownerOf(0)).to.be.equal(alice.address);
     })
-    it("Should mint 100 NFTs", async function () {
-      const { nft, alice } = await loadFixture(deployContracts);
-      for (let i = 0 ; i < 100 ; i++) {
-        const mint = await nft.safeMint();
-        const mintReceipt = await mint.wait(1);
-      }
-      expect(await nft.balanceOf(alice.address)).to.be.equal(100);
+    it("Should transfer 1 NFT", async function () {
+      const { nft, alice, bob } = await loadFixture(deployContracts);
+      await nft.safeMint();
+      await nft.transferFrom(alice.address, bob.address, 0);
+      expect(await nft.ownerOf(0)).to.be.equal(bob.address);
     })
+    it("Should not mint twice", async function () {
+      const { nft, alice } = await loadFixture(deployContracts);
+      await nft.safeMint();
+      expect(await nft.ownerOf(0)).to.be.equal(alice.address);
+      await expect(nft.safeMint()).to.be.revertedWith("Caller already minted")
+    })  
   })
 })

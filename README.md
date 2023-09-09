@@ -11,7 +11,7 @@ npm i
 ## Test
 
 ```
-npx hardhat test
+npm test
 ```
 
 ## Deploy
@@ -36,7 +36,7 @@ npx hardhat run scripts/deploy.ts --network arthera-testnet
 npx hardhat run scripts/mint.ts --network arthera-testnet
 ```
 
-## Latest deployment
+## First deployment (v0.1.0)
 
 - [June-25-2023 17:38:39 PM +02:00 UTC](https://explorer-test.arthera.net/address/0xe2c7afe278BD3B60798208F84281A4e4733d1688)
 
