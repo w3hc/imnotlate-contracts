@@ -9,16 +9,20 @@ import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/cryptography/EIP712Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721VotesUpgradeable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "./ISubscriptionOwner.sol";
+import "@openzeppelin/contracts-upgradeable/utils/introspection/ERC165Upgradeable.sol";
 
 /// @custom:security-contact julien@strat.cc
 contract ImnotlateV2 is
+    ERC165Upgradeable,
     ERC721Upgradeable,
     ERC721EnumerableUpgradeable,
     ERC721URIStorageUpgradeable,
     ERC721BurnableUpgradeable,
     OwnableUpgradeable,
     EIP712Upgradeable,
-    ERC721VotesUpgradeable
+    ERC721VotesUpgradeable,
+    ISubscriptionOwner
 {
     using Counters for Counters.Counter;
 
@@ -92,12 +96,19 @@ contract ImnotlateV2 is
         public
         view
         override(
+            ERC165Upgradeable,
             ERC721Upgradeable,
             ERC721EnumerableUpgradeable,
             ERC721URIStorageUpgradeable
         )
         returns (bool)
     {
-        return super.supportsInterface(interfaceId);
+        return
+            interfaceId == type(ISubscriptionOwner).interfaceId ||
+            super.supportsInterface(interfaceId);
+    }
+
+    function getSubscriptionOwner() external view returns (address) {
+        return owner();
     }
 }
