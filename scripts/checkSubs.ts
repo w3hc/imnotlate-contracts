@@ -2,7 +2,7 @@ import { ethers } from "hardhat";
 import fs from 'fs'
 
 async function main() {
-
+  try {
   const [signer] = await ethers.getSigners()
   // const contractAddress = '0xe2c7afe278BD3B60798208F84281A4e4733d1688'
   const contractAddress = '0x159025f4A1FbA5e592317b2Ff988004f8582Ca78'
@@ -17,7 +17,7 @@ async function main() {
   }
   const nft = new ethers.Contract(contractAddress, nftAbi.abi, signer)
 
-  try {
+  
     
     const subscribersContractAddress = "0x000000000000000000000000000000000000Aa07"
     const subscribersContractAbi = [
@@ -1767,11 +1767,12 @@ async function main() {
 
     console.log('hasActiveSubscription:', await subscribers.hasActiveSubscription("0x159025f4A1FbA5e592317b2Ff988004f8582Ca78"))
 
-
-    // const mint = await nft.safeMint(issuer.address); 
-    // const mintReceipt = await mint.wait(1);
-    // const diff = Date.now() - previousMint // not super reliable
-    // console.log("Done ✅", mintReceipt.transactionHash, diff, "milliseconds")
+    const userAddr = "0x6F8c8b6c06c2E4c5495C623D42cf3F612288eeA3"
+    console.log("userAddr:", userAddr)
+    const whitelistUser = await subscribers.whitelistAccount("0x159025f4A1FbA5e592317b2Ff988004f8582Ca78", userAddr)
+    const receipt = await whitelistUser.wait(1)
+    console.log('isWhitelisted:', await subscribers.isWhitelisted("0x159025f4A1FbA5e592317b2Ff988004f8582Ca78", userAddr))
+    console.log('whitelisting receipt:', receipt)
   }
   
  catch(e) {

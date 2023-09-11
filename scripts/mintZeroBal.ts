@@ -1,6 +1,5 @@
 import { ethers } from "hardhat";
 import fs from 'fs'
-import * as holders from '../holders-list.json'
 
 async function main() {
 
@@ -17,19 +16,20 @@ async function main() {
     return;
   }
   const nft = new ethers.Contract(contractAddress, nftAbi.abi, signer)
-  const numberOfMint = 1970
-  // console.log('holders:', holders)
-  for (let i = 0 ; i < numberOfMint ; i++) {
 
-  try {
-      const mint = await nft.safeMint(holders[i]); 
-      const mintReceipt = await mint.wait(1);
-      console.log("Done ✅", mintReceipt.transactionHash)
-    
-    
-  } catch(e) {
-    console.log("Error ❌", e)
+  try {   
+    const balBefore = await ethers.provider.getBalance(signer.address)
+    console.log('Balance before mint:', Number(balBefore))
+    const mint = await nft.safeMint(signer.address, {gaslimit:100000}); 
+    await mint.wait(1);
+    const balAfter = await ethers.provider.getBalance(signer.address)
+    console.log('Balance  after mint:', Number(balAfter))
+    console.log('Total amount of AA spent (tx fee):', Number(balBefore-balAfter))
+    console.log("Mint done ✅")
   }
+  
+ catch(e) {
+  console.log("Error ❌", e)
 }
 }
 
