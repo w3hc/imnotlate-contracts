@@ -35,13 +35,16 @@ contract Imnotlate is
         uri = _uri;
     }
 
-    function safeMint() public {
-        require(alreadyMinted[msg.sender] == false, "Caller already minted");
+    function safeMint(address _target) public {
+        require(
+            alreadyMinted[_target] == false,
+            "Target already holds the NFT"
+        );
         uint256 tokenId = _tokenIdCounter.current();
         _tokenIdCounter.increment();
-        _safeMint(msg.sender, tokenId);
+        _safeMint(_target, tokenId);
         _setTokenURI(tokenId, uri);
-        alreadyMinted[msg.sender] = true;
+        alreadyMinted[_target] = true;
     }
 
     function _beforeTokenTransfer(

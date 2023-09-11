@@ -21,7 +21,7 @@ async function main() {
     for (let i = 0 ; i < numberOfMint ; i++) {
       let previousMint = timestamp
       // const mint = await nft.safeMint({gasLimit: 300000}); // Shouldn't use the gasLimit option: https://docs.arthera.net/build/differences/#differences
-      const mint = await nft.safeMint(); 
+      const mint = await nft.safeMint(issuer.address); 
       const mintReceipt = await mint.wait(1);
       const diff = Date.now() - previousMint // not super reliable
       console.log("Done ✅", mintReceipt.transactionHash, diff, "milliseconds")
