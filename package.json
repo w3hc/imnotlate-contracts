@@ -6,7 +6,8 @@
   "scripts": {
     "test": "hardhat test",
     "compile": "hardhat compile",
-    "dontbelate": "hardhat run scripts/deploy.ts --network arthera-testnet"
+    "dontbelate": "hardhat run scripts/deploy.ts --network arthera-testnet",
+    "checkSubs": "hardhat run scripts/checkSubs.ts --network arthera-testnet"
   },
   "keywords": [],
   "author": "Julien",
