@@ -30,15 +30,17 @@ Deploy:
 pnpm dontbelate
 ```
 
-## Mint
+## Other commands
 
 ```
-npx hardhat run scripts/mint.ts --network arthera-testnet
+npx hardhat run scripts/checkSubs.ts --network arthera-testnet // also whitelist a user
+npx hardhat run scripts/mintZeroBal.ts --network arthera-testnet // to trigger from a virgin account in .env
 ```
 
-## First deployment (v0.1.0)
+## Deployments
 
-- [June-25-2023 17:38:39 PM +02:00 UTC](https://explorer-test.arthera.net/address/0xe2c7afe278BD3B60798208F84281A4e4733d1688)
+- https://explorer-test.arthera.net/address/0xe2c7afe278BD3B60798208F84281A4e4733d1688
+- https://explorer-test.arthera.net/address/0x159025f4A1FbA5e592317b2Ff988004f8582Ca78
 
 ## Listing NFT holders
 
